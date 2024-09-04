@@ -1,5 +1,7 @@
+//Uses config set global components for the layout
 export default function Layout({ config, children }) {
-    //Use the config data to render the layout
+    //Create at least a header and footer component
+    //Use console.log to determine blok object structure if unsure...
     return (
         <>
             <header></header>

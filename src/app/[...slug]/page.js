@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { StoryblokCMS } from "@/utils/cms";
 
 //Generates static paths for all stories
+//Nextjs will generate a static page for each story
 export async function generateStaticParams() {
   try {
     const paths = await StoryblokCMS.getStaticPaths();
@@ -19,6 +20,7 @@ export async function generateMetadata({params}) {
 }
 
 //Params are passed to the CMSPage component and used to fetch the story
+//This function is called for each item in the paths array returned from generateStaticParams func
 export default async function CMSPage({ params }) {
   try {
     const currentStory = await StoryblokCMS.getStory(params);
@@ -30,6 +32,7 @@ export default async function CMSPage({ params }) {
   }
 }
 
+//Force dynamic rendering in development and Visual editor
 export const dynamic = StoryblokCMS.isDevelopment
   ? "force-dynamic"
   : "force-static";
