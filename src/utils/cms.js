@@ -5,6 +5,8 @@ export class StoryblokCMS {
   static VERSION = this.IS_PROD ? "published" : "draft";
   static TOKEN = process.env.NEXT_PUBLIC_PREVIEW_STORYBLOK_TOKEN;
 
+  static isEditor = process.env.NEXT_PUBLIC_SITE_SLUG === "editor";
+
   static async sbGet(path, params) {
     return getStoryblokApi().get(path, params);
   }

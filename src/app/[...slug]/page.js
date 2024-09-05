@@ -14,7 +14,7 @@ export async function generateStaticParams() {
 }
 
 //Generates static meta props for each story
-export async function generateMetadata({params}) {
+export async function generateMetadata({ params }) {
   const slug = params.slug.join("/");
   return StoryblokCMS.generateMetaFromStory(slug);
 }
@@ -33,6 +33,7 @@ export default async function CMSPage({ params }) {
 }
 
 //Force dynamic rendering in development and Visual editor
-export const dynamic = StoryblokCMS.isDevelopment
-  ? "force-dynamic"
-  : "force-static";
+export const dynamic =
+  StoryblokCMS.isDevelopment || StoryblokCMS.isEditor
+    ? "force-dynamic"
+    : "force-static";
