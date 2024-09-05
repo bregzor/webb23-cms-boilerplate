@@ -5,13 +5,15 @@ export class StoryblokCMS {
   static VERSION = this.IS_PROD ? "published" : "draft";
   static TOKEN = process.env.NEXT_PUBLIC_PREVIEW_STORYBLOK_TOKEN;
 
-  static isEditor = process.env.NEXT_PUBLIC_SITE_SLUG === "editor";
+  static isEditor = process.env.NEXT_PUBLIC_SITE_SLUG == "editor";
+
 
   static async sbGet(path, params) {
     return getStoryblokApi().get(path, params);
   }
 
   static async getStory(params) {
+    console.log("IS VISUAL EDITOR DOMAIN", this.isEditor);
     if (!params) return {};
     const uri = params?.slug?.join("/");
     const storyUrl = "cdn/stories/" + uri;
