@@ -14,7 +14,7 @@ const Header = () => {
       </header1>
       <header2 className="bg-white-100 py-4 px-20 flex items-center space-x-10">
 
-        <h1 className="text-2xl font-bold">Ecommerce</h1>
+        <h1 className="text-2xl font-bold">Ecommerce.</h1>
         <div className="flex items-center space-x-4">
           <a href="Product" className="text-gray-600 hover:text-gray-900">Products</a>
           <a href="About" className="text-gray-600 hover:text-gray-900">About</a>
