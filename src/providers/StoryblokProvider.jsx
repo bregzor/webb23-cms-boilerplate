@@ -6,11 +6,15 @@ import Page from "@/components/content-types/Page";
 
 import Teaser from "@/components/nestable/Teaser";
 import RichTextDefault from "@/components/nestable/RichText";
+import ShopListPage from "@/components/nestable/ShopListPage";
+import Category from "@/components/nestable/Category";
 
 const components = {
   "page": Page,
   "teaser":Teaser,
-  "richtext": RichTextDefault
+  "richtext": RichTextDefault,
+  "shoplistpage": ShopListPage,
+  "category": Category
 }
 
 storyblokInit({
