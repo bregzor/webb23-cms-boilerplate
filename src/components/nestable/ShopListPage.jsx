@@ -1,28 +1,32 @@
 "use client";
-import React, { useState } from "react";
-import { storyblokEditable } from "@storyblok/react/rsc";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation"; // Use 'next/navigation' for the router
+import { storyblokEditable, StoryblokComponent } from "@storyblok/react/rsc";
 import Product from "./Product";
-import Category from "./Category"; // Ensure this path is correct
 
 export default function ShopListPage({ blok }) {
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const router = useRouter(); // Initialize router
+  const [selectedCategory, setSelectedCategory] = useState(null); // Initialize state for the selected category
 
-  // Handle category click
-  const handleCategoryClick = (categorySlug) => {
-    setSelectedCategory(categorySlug);
-  };
+  // Update selected category based on URL parameters
+  useEffect(() => {
+    const categoryFromQuery = new URLSearchParams(window.location.search).get('category');
+    setSelectedCategory(categoryFromQuery || null);
+  }, [router]);
 
-  // Reset category filter
-  const handleAllClick = () => {
-    setSelectedCategory(null);
-  };
-
-  // Filter products based on selected category
+  // Filter products based on the selected category
   const filteredProducts = selectedCategory
     ? blok.products.filter((product) =>
         product.category.includes(selectedCategory)
       )
     : blok.products;
+
+  // Function to handle category change
+  const handleCategoryChange = (slug) => {
+    const newCategory = slug === "all" ? null : slug; 
+    setSelectedCategory(newCategory);
+    router.push(`?category=${newCategory || ""}`, undefined, { shallow: true });
+  };
 
   return (
     <section className="w-full bg-red" {...storyblokEditable(blok)}>
@@ -35,36 +39,32 @@ export default function ShopListPage({ blok }) {
 
         {/* Categories */}
         <div className="flex flex-wrap items-start mb-8">
-          {/* "All" Button */}
           <button
-            className={`w-28 mr-2 mb-2 p-4 border border-black cursor-pointer transition-colors ${
-              !selectedCategory ? "bg-black text-white" : "bg-white text-black"
+            onClick={() => handleCategoryChange("all")}
+            className={`w-28 mr-2 mb-2 border p-2 ${
+              selectedCategory === null ? "bg-black text-white" : ""
             }`}
-            onClick={handleAllClick}
           >
-            <h2 className="text-l font-semibold">All</h2>
+            All
           </button>
-          {/* Category Buttons */}
           {blok?.categories?.map((category) => (
-            <div className="w-28 mr-2 mb-2" key={category._uid}>
-              <Category
-                blok={category}
-                onClick={handleCategoryClick}
-                isSelected={selectedCategory === category.slug}
-              />
-            </div>
+            <button
+              key={category._uid}
+              onClick={() => handleCategoryChange(category.slug)}
+              className={`w-28 mr-2 mb-2 border p-2 ${
+                selectedCategory === category.slug ? "bg-black text-white" : ""
+              }`}
+            >
+              {category.name}
+            </button>
           ))}
         </div>
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <Product key={product._uid} blok={product} />
-            ))
-          ) : (
-            <p>No products found for this category.</p>
-          )}
+          {filteredProducts.map((product) => (
+            <Product key={product._uid} blok={product} />
+          ))}
         </div>
       </div>
     </section>
