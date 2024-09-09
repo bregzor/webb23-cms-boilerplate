@@ -8,13 +8,15 @@ import Teaser from "@/components/nestable/Teaser";
 import RichTextDefault from "@/components/nestable/RichText";
 import ShopListPage from "@/components/nestable/ShopListPage";
 import Category from "@/components/nestable/Category";
+import Product from "@/components/nestable/Product";
 
 const components = {
   "page": Page,
   "teaser":Teaser,
   "richtext": RichTextDefault,
   "shoplistpage": ShopListPage,
-  "category": Category
+  "category": Category,
+  "product": Product
 }
 
 storyblokInit({
