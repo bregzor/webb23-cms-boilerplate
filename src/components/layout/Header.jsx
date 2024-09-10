@@ -18,7 +18,7 @@ const Header = () => {
         
         <div className="flex items-center space-x-4">
           <a href="products" className="text-gray-600 hover:text-gray-900">Products</a>
-          <a href="About" className="text-gray-600 hover:text-gray-900">About</a>
+          <a href="about" className="text-gray-600 hover:text-gray-900">About</a>
         </div>
         <div className="flex items-center space-x-4">
           <div className="relative text-gray-600 hover:text-gray-900 flex items-center"> {/* Added flex items-center */}
