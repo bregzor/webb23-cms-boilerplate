@@ -9,6 +9,8 @@ import RichTextDefault from "@/components/nestable/RichText";
 import ShopListPage from "@/components/nestable/ShopListPage";
 import Category from "@/components/nestable/Category";
 import Product from "@/components/nestable/Product";
+import Hero from "@/components/nestable/Hero";
+import ImageBanner from "@/components/nestable/ImageBanner";
 
 const components = {
   "page": Page,
@@ -16,7 +18,9 @@ const components = {
   "richtext": RichTextDefault,
   "shoplistpage": ShopListPage,
   "category": Category,
-  "product": Product
+  "product": Product,
+  "hero": Hero,
+  "image_banner": ImageBanner
 }
 
 storyblokInit({
