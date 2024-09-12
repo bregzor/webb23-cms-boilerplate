@@ -4,8 +4,6 @@ const accessToken = process.env.NODE_ENV === "production"
   ? process.env.NEXT_PUBLIC_PRODUCTION_STORYBLOK_TOKEN
   : process.env.NEXT_PUBLIC_PREVIEW_STORYBLOK_TOKEN;
 
-console.log('Access Token:', accessToken);
-
 const Storyblok = new StoryblokClient({ accessToken });
 
 const getVersion = () => process.env.NODE_ENV === "production" ? "published" : "draft";
@@ -30,7 +28,6 @@ export const fetchProducts = async () => {
     token: accessToken,
     cv: new Date().getTime(),
   };
-  console.log('API Params:', params);
   return await fetchFromStoryblok(params);
 };
 
@@ -59,9 +56,11 @@ export const fetchProductsByCategory = async (slug) => {
     token: accessToken,
     cv: new Date().getTime(),
   };
-  console.log('API Params for category:', params);
   const products = await fetchFromStoryblok(params);
-  return products.filter(product => product.content.category?.includes(slug));
+  console.log('Fetched Products for Category:', products);
+  const filteredProducts = products.filter(product => product.content.categories?.includes(slug));
+  console.log('Filtered Products:', filteredProducts);
+  return filteredProducts;
 };
 
 export const fetchNewestProducts = async (limit = 3) => {
@@ -73,6 +72,42 @@ export const fetchNewestProducts = async (limit = 3) => {
     per_page: limit,
     sort_by: "created_at:desc",
   };
-  console.log('API Params for newest products:', params);
   return await fetchFromStoryblok(params);
+};
+
+export const fetchHomePageContent = async () => {
+  const params = {
+    version: getVersion(),
+    token: accessToken,
+    cv: new Date().getTime(),
+  };
+  try {
+    const res = await Storyblok.get("cdn/stories/products", params);
+    if (!res.data || !res.data.story) {
+      throw new Error('No story found in response');
+    }
+    console.log('Fetched Home Page Content:', res.data.story.content);
+    return res.data.story.content;
+  } catch (error) {
+    console.error('Error fetching home page content:', error.message);
+    return null;
+  }
+};
+
+export const fetchAllRoutes = async () => {
+    const params = {
+        version: getVersion(),
+        token: accessToken,
+        cv: new Date().getTime(),
+    };
+    try {
+        const res = await Storyblok.get("cdn/stories", params);
+        if (!res.data || !res.data.stories) {
+            throw new Error('No stories found in response');
+        }
+        return res.data.stories.map(story => ({ path: `/${story.full_slug}` }));
+    } catch (error) {
+        console.error('Error fetching routes from Storyblok:', error.message);
+        return [];
+    }
 };
