@@ -13,7 +13,7 @@ import ProductDetailPage from "@/components/nestable/ProductDetailPage";
 import ProductList from "@/components/nestable/ProductList";
 import ProductItem from "@/components/nestable/ProductItem";
 import LatestProductsHero from "@/components/nestable/LatestProductsHero";
-import Product from "@/components/nestable/Product";
+import Product from "@/components/nestable/ProductItem";
 
 const components = {
   "page": Page,
