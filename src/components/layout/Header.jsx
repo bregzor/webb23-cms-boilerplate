@@ -1,6 +1,5 @@
 "use client";
 import React from 'react';
-import Search from '@/components/nestable/Search'; // Import the Search component
 
 const Header = ({ config }) => {
   if (!config) {
@@ -57,7 +56,6 @@ const Header = ({ config }) => {
           ))}
         </div>
         <div className="flex items-center space-x-4">
-          <Search /> {/* Use the Search component */}
         </div>
       </header>
       <hr />
