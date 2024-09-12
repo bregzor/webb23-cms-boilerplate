@@ -1,4 +1,5 @@
 // src/app/layout.js
+"use client;"
 import Layout from "@/components/layout";
 import "./globals.css";
 import StoryblokProvider from "@/providers/StoryblokProvider";
@@ -12,13 +13,14 @@ storyblokInit({
 
 export default async function RootLayout({ children }) {
   const currentConfig = await StoryblokCMS.getConfig();
-  console.log('Current Config:', currentConfig);
 
   return (
     <StoryblokProvider>
       <html>
         <body>
-          <Layout config={currentConfig}>{children}</Layout>
+          <Layout config={currentConfig}>
+            {children}
+          </Layout>
         </body>
       </html>
     </StoryblokProvider>
