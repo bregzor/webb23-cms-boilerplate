@@ -22,6 +22,7 @@ const components = {
   "image_banner": ImageBanner
 }
 
+// hej
 storyblokInit({
   accessToken: StoryblokCMS.TOKEN,
 
