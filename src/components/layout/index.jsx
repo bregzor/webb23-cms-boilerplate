@@ -1,15 +1,16 @@
-import Header from "./Header";
-import Footer from "./Footer";
+import React from 'react';
+import Header from './Header';
+import Footer from './Footer';
 
-//Uses config set global components for the layout
+// Uses config set global components for the layout
 export default function Layout({ config, children }) {
-    //Create at least a header and footer component
-    //Use console.log to determine blok object structure if unsure...
-    return (
-        <>  
-            <header><Header /></header>
-            <main>{children}</main>
-            <footer><Footer /></footer>
-        </>
-    );
+  console.log('Layout Config:', config);
+
+  return (
+    <>
+      <header><Header config={config} /></header>
+      <main>{children}</main>
+      <footer><Footer config={config} /></footer>
+    </>
+  );
 }
