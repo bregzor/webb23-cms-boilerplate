@@ -13,6 +13,7 @@ import ProductDetailPage from "@/components/nestable/ProductDetailPage";
 import ProductList from "@/components/nestable/ProductList";
 import ProductItem from "@/components/nestable/ProductItem";
 import LatestProductsHero from "@/components/nestable/LatestProductsHero";
+import Product from "@/components/nestable/Product";
 
 const components = {
   "page": Page,
@@ -25,7 +26,8 @@ const components = {
   "image_banner": ImageBanner,
   "productdetailpage": ProductDetailPage,
   "productitem": ProductItem,
-  "latest-products-hero": LatestProductsHero
+  "latest-products-hero": LatestProductsHero,
+  "product": Product
 }
 
 // hej
