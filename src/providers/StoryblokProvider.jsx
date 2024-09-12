@@ -6,7 +6,7 @@ import Page from "@/components/content-types/Page";
 import Teaser from "@/components/nestable/Teaser";
 import RichTextDefault from "@/components/nestable/RichText";
 import Category from "@/components/nestable/Category";
-import Product from "@/components/content-types/Products";
+import Products from "@/components/content-types/Products";
 import Hero from "@/components/nestable/Hero";
 import ImageBanner from "@/components/nestable/ImageBanner";
 import ProductDetailPage from "@/components/nestable/ProductDetailPage";
@@ -20,7 +20,7 @@ const components = {
   "richtext": RichTextDefault,
   "Product List": ProductList,
   "categories": Category,
-  "products": Product,
+  "products": Products,
   "hero": Hero,
   "image_banner": ImageBanner,
   "productdetailpage": ProductDetailPage,
